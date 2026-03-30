@@ -3,121 +3,166 @@
     --bg-light-blue: #eef2ff;
     --text-muted: #8e94a9;
     --dark-blue: #3f4254;
-    --sidebar-width: 250px; /* Definimos a largura aqui para facilitar */
+    --sidebar-width: 250px;
 }
 
-/* --- Reset e Base --- */
+/* --- Reset --- */
 body {
     background-color: var(--bg-light-blue);
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
 
+/* --- Layout Principal --- */
 .dashboard-container {
+    display: flex;
     min-height: 100vh;
+}
+
+.card-body-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 10px; /* Evita que o texto encoste nas bordas laterais */
+}
+
+.card-body-content h3 {
+    color: var(--dark-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+}
+
+/* Container do Texto (Onde estava o bug) */
+.card-body-content {
+    flex-grow: 1; /* Faz o texto ocupar o espaço central */
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Centraliza o título e o texto verticalmente */
+    width: 100%;
 }
 
 /* --- Área de Conteúdo --- */
 .content-area {
-    padding: 40px 20px;
     background-color: #f8f9fa;
     width: 100%;
+    padding: 40px 20px;
     box-sizing: border-box;
 }
 
 /* --- Grid de Cards --- */
 .help-container {
     display: grid;
-    /* auto-fill é melhor que auto-fit aqui para manter o tamanho no Desktop */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto; /* Centraliza o grid */
+    margin: 0 auto;
 }
 
 .help-card {
-    background: #fff;
-    border-radius: 12px;
+background: #ffffff;
+    border-radius: 15px;
     padding: 30px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    
+    /* Organização interna */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    
+    /* Dimensões */
     min-height: 450px;
-    transition: transform 0.3s ease;
+    height: 100%;
     box-sizing: border-box;
+    transition: transform 0.3s ease;
 }
 
-/* Estilos internos do card para garantir que o texto não quebre o layout */
-.help-card .content h3 {
-    margin-top: 15px;
+.help-card:hover {
+    transform: translateY(-5px);
+}
+
+.help-card .content {
+    flex-grow: 1; /* Empurra a paginação para o fundo e mantém o texto no centro */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.help-card h3 {
+    color: var(--dark-blue);
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+}
+
+.help-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.pagination-dots {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+}
+
+.dot.active { background-color: var(--primary-blue); }
+
+/* --- ICONES --- */
+.icon-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
     color: var(--dark-blue);
 }
 
-.help-card .content p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
+.icon-wrapper {
+    margin-bottom: 10px;
 }
 
-/* --- Responsividade Desktop (min-width: 768px) --- */
+/* --- DESKTOP (Acima de 768px) --- */
 @media (min-width: 768px) {
     .sidebar {
-        width: var(--sidebar-width);
-        min-width: var(--sidebar-width);
+        width: var(--sidebar-width) !important;
+        position: fixed !important;
         height: 100vh;
-        position: fixed;
-        left: 0;
         top: 0;
+        left: 0;
         z-index: 1000;
-        background-color: #fff;
+        background: #fff;
         border-right: 1px solid #dee2e6;
     }
 
     .content-area {
-        /* O segredo: margem esquerda para empurrar o conteúdo para fora da sidebar */
-        margin-left: var(--sidebar-width); 
+        margin-left: var(--sidebar-width); /* Reserva o espaço da sidebar */
         width: calc(100% - var(--sidebar-width));
-        min-height: 100vh;
+        padding: 50px 30px;
     }
 }
 
-/* --- Responsividade Mobile (max-width: 767px) --- */
+/* --- MOBILE (Abaixo de 767px) --- */
 @media (max-width: 767.98px) {
-    .sidebar {
-        width: 100% !important;
-        position: relative !important;
-        height: auto !important;
-        margin-left: 0 !important;
-    }
+    .dashboard-container { flex-direction: column; }
 
-    .content-area {
-        margin-left: 0 !important;
-        width: 100% !important;
-        padding: 20px 15px;
-    }
+    .content-area { padding: 20px 15px; }
 
-    .help-container {
-        grid-template-columns: 1fr; /* Uma coluna no mobile */
-        max-width: 400px; /* Opcional: evita que o card fique largo demais no celular */
-    }
+    .help-container { grid-template-columns: 1fr; }
 
-    .help-card {
-        min-height: auto;
-        padding: 20px;
-    }
-
-    .icon-wrapper {
-        height: 120px;
-    }
-
-    .icon-placeholder {
-        width: 100px;
-        height: 100px;
-        font-size: 50px;
-        margin: 0 auto;
-    }
+    .help-card { min-height: auto; padding: 20px; }
 }
