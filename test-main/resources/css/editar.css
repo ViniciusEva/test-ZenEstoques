@@ -10,13 +10,27 @@
 body {
     background-color: var(--bg-light-blue);
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
 }
 
 /* --- Layout Principal --- */
 .dashboard-container {
     display: flex;
     min-height: 100vh;
+}
+
+/* Sidebar Ajustes */
+.sidebar {
+    width: 270px; /* Largura fixa para a sidebar */
+    min-width: 300px;
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 10px 15px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
 }
 
 .card-body-content p {

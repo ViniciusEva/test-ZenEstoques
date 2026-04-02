@@ -35,15 +35,36 @@ body {
 }
 
 
+/* Sidebar Ajustes */
 .sidebar {
-    min-width: 200px;
-    background-color: var(--sidebar-bg);
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--border-color);
+    width: 270px; /* Largura fixa para a sidebar */
+    min-width: 300px;
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 10px 15px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.05);
 }
+
+
+
+.sidebar a.active {
+  background-color: #6f42c1;
+  color: #fff;
+  border-radius: 8px;
+}
+.sidebar a:hover {
+  background-color: #6f42c1;
+  color: #fff;
+  border-radius: 8px;
+}
+
+
+
+
 
 
 .content {
@@ -164,11 +185,28 @@ body {
 }
 
 
+/* No CSS geral */
 .sales-table-container {
     background-color: var(--card-background);
-    padding: 2rem;
+    padding: 1.5rem; /* Reduzi um pouco o padding para ganhar espaço no mobile */
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    overflow: hidden; /* Garante que nada saia do arredondamento do card */
+}
+
+/* Crie esta nova regra para envolver a tabela */
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Ativa o scroll lateral apenas na tabela */
+    -webkit-overflow-scrolling: touch; /* Scroll suave no iPhone */
+    margin-bottom: 1rem;
+}
+
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px; /* Garante que a tabela não fique "esmagada" */
 }
 
 .table-header {
@@ -265,4 +303,56 @@ body {
 .page-link.active {
     background-color: var(--primary-color);
     color: var(--card-background);
+}
+
+
+
+
+
+
+
+/* --- DESKTOP (Acima de 768px) --- */
+@media (min-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-width) !important;
+        position: fixed !important;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: #fff;
+        border-right: 1px solid #dee2e6;
+    }
+
+    .content-area {
+        margin-left: var(--sidebar-width); /* Reserva o espaço da sidebar */
+        width: calc(100% - var(--sidebar-width));
+        padding: 50px 30px;
+    }
+}
+
+/* --- MOBILE (Abaixo de 767px) --- */
+@media (max-width: 767.98px) {
+    .dashboard-container { flex-direction: column; }
+
+    .content-area { padding: 20px 15px; }
+
+    .help-container { grid-template-columns: 1fr; }
+
+    .help-card { min-height: auto; padding: 20px; }
+
+    .summary-cards {
+        flex-direction: column; /* Empilha os cartões no mobile */
+        gap: 1rem;
+    }
+
+    .card {
+        width: 100%; /* Garante que ocupem a largura toda */
+    }
+    
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 }

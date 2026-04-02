@@ -32,13 +32,17 @@ body {
 }
 
 
+/* Sidebar Ajustes */
 .sidebar {
-    /* width: 250px; */
-    background-color: var(--sidebar-bg);
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--border-color);
+    width: 270px; /* Largura fixa para a sidebar */
+    min-width: 300px;
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 10px 15px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.05);
 }
 

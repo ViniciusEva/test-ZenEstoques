@@ -81,16 +81,17 @@
                     </div>
                 </div>
                 
-                <table class="sales-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Tipo</th>
-                            <th>Período</th>
-                            <th>Custo</th>
-                            <th>Valor</th>
-                            <th>Total</th>
-                            <?php
+                <div class="table-responsive-wrapper">
+                    <table class="sales-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Período</th>
+                                <th>Custo</th>
+                                <th>Valor</th>
+                                <th>Total</th>
+                                <?php
 // Simulação de dados de vendas que viriam de um banco de dados
 function getVendas() {
     return [
@@ -142,6 +143,7 @@ foreach ($vendas as $venda) {
                             <span class="material-icons">chevron_right</span>
                         </a>
                     </div>
+                </table>
                 </div>
             </section>
         </main>
